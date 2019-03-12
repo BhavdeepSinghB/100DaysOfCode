@@ -1,0 +1,15 @@
+MADE WITH PYJOURNAL - https://www.github.com/bhavdeepsinghb/pyjournal/
+
+[2019-03-11 22:21:17.710869]
+Started the project. 
+Known issues:
+1) Seconds output is wrong in most cases
+2) Haven't added a case to add a timer for hours
+3) Limited testing
+4) Need to beautify it a little
+
+
+[2019-03-11 22:21:17.710869]
+Positive note: Logic works so technically achieved a working a timer, but need eed to work on its output
+
+
