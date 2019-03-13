@@ -16,7 +16,7 @@ targetHr = int(target[0])
 targetMin = int(target[1])
 targetSec = int(target[2])
 
-incrementTime = time.localtime()
+incrementTime = time.localtime() 
 incrementHr = incrementTime.tm_hour
 incrementMin = incrementTime.tm_min
 incrementSec = incrementTime.tm_sec
