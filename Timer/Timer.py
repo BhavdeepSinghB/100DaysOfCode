@@ -6,34 +6,51 @@ import time
 import sys
 
 
+
 if len(sys.argv) == 1:
-    print "Use: Timer.py <target time>"
+    print "Use: Timer.py <hh:mm:ss>"
     sys.exit()
 
 target = sys.argv[1].split(":")
-targetMin = int(target[0])
-targetSec = int(target[1])
+targetHr = int(target[0])
+targetMin = int(target[1])
+targetSec = int(target[2])
 
 incrementTime = time.localtime()
+incrementHr = incrementTime.tm_hour
 incrementMin = incrementTime.tm_min
 incrementSec = incrementTime.tm_sec
 
-print("9:{}:{}".format(incrementMin, incrementSec))
+print("{}:{}:{}".format(incrementHr,incrementMin, incrementSec))
 
 finalMin = incrementMin + targetMin
 finalSec = incrementSec + targetSec
+finalHr = incrementHr + targetHr
 
 if(finalSec >= 60):
     finalSec -= 60
     finalMin += 1
-    
+if(finalMin >= 60):
+    finalMin = 0
+    finalHr += 1
+if(finalHr < incrementHr):
+    finalHr += 24
 
-while(incrementMin != finalMin) or (incrementSec != finalSec):
-    if finalSec - incrementSec < 0:
-        print "{}:{}".format(finalMin-incrementMin - 1, 60 + (targetSec - incrementSec))
+print "{}:{}:{}".format(finalHr, finalMin, finalSec)
+
+while(incrementMin != finalMin) or (incrementSec != finalSec) or (incrementHr != finalHr):
+    
+    if finalMin - incrementMin < 0:
+        if finalSec - incrementSec <= 0:
+            print "%02d:%02d:%02d" % (finalHr - incrementHr - 1, 60 + (finalMin - incrementMin), 60 + (finalSec - incrementSec))
+        else:
+            print "%02d:%02d:%02d" % (finalHr - incrementHr, 60 + finalMin-incrementMin, finalSec - incrementSec)
     else:
-        print "{}:{}".format(finalMin-incrementMin, finalSec - incrementSec)
-   
+        if finalSec - incrementSec < 0:   
+            print "%02d:%02d:%02d" % (finalHr - incrementHr - 1, 60 - finalMin-incrementMin + 1, 60 + (finalSec - incrementSec))
+        else:
+            print "%02d:%02d:%02d" % (finalHr - incrementHr, finalMin-incrementMin, finalSec - incrementSec)
+    
     sys.stdout.write("\033[F")
     time.sleep(1)
     
@@ -41,6 +58,9 @@ while(incrementMin != finalMin) or (incrementSec != finalSec):
     if incrementSec == 60:
         incrementMin += 1
         incrementSec = 0
+    if incrementMin == 60:
+        incrementHr += 1
+        incrementMin = 0
     
-print "{}:{}".format(incrementMin, incrementSec)
+print "{}:{}:{}".format(incrementHr,incrementMin, incrementSec)
 

@@ -13,3 +13,11 @@ Known issues:
 Positive note: Logic works so technically achieved a working a timer, but need eed to work on its output
 
 
+[2019-03-12 21:00:09.631610]
+Timer bug fixed, one test case passed, will be working on more test cases as I begin writing the part to accomodate hours
+
+
+[2019-03-12 21:00:09.631610]
+Today's build done, minutes and seconds problem resolved, now moving on to hours. The problem is that hours aren't matching up, there is some problem in the way I'm calculating it.
+
+
