@@ -21,3 +21,8 @@ Timer bug fixed, one test case passed, will be working on more test cases as I b
 Today's build done, minutes and seconds problem resolved, now moving on to hours. The problem is that hours aren't matching up, there is some problem in the way I'm calculating it.
 
 
+[2019-03-13 16:33:57.919267]
+With limited testing, the code seems to pass most test cases. Need to test something for midnight and make sure that works but it shouldn't be too much of a problem. Hopefully. Since I have added functionality for finalHr < incrementHr. But we shall see. 
+Next goal is to add some GUI elements to make something pop up when the timer is done. But otherwise, it looks like I'm moving pretty fast towards a final build
+
+
