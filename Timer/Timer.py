@@ -4,14 +4,23 @@
 
 import time
 import sys
-
+import Tkinter as tk
+import tkMessageBox
 
 
 if len(sys.argv) == 1:
     print "Use: Timer.py <hh:mm:ss>"
     sys.exit()
 
+root = tk.Tk()
+root.geometry("1x1")
+
 target = sys.argv[1].split(":")
+
+if(len(target) != 3):
+    print "User: Timer.py <hh:mm:ss>"
+    sys.exit()
+
 targetHr = int(target[0])
 targetMin = int(target[1])
 targetSec = int(target[2])
@@ -50,19 +59,28 @@ while(incrementMin != finalMin) or (incrementSec != finalSec) or (incrementHr !=
     
     if finalMin - incrementMin < 0:
         if finalSec - incrementSec < 0:
-            print "%02d:%02d:%02d" % (finalHr - incrementHr, (60 + finalMin) - incrementMin, (60 + finalSec) - incrementSec)
+            print "%02d:%02d:%02d" % (finalHr - incrementHr - 1, (60 + finalMin) - incrementMin - 1, (60 + finalSec) - incrementSec)
         else:
-            print "%02d:%02d:%02d" % (finalHr - incrementHr, (60 + finalMin) - incrementMin, finalSec - incrementSec)
+            print "%02d:%02d:%02d" % (finalHr - incrementHr - 1, (60 + finalMin) - incrementMin, finalSec - incrementSec)
     else:
         if finalSec - incrementSec < 0: 
-            print "%02d:%02d:%02d" % (finalHr - incrementHr, (finalMin-incrementMin) - 1, (60 + finalSec) - incrementSec)
+            print "%02d:%02d:%02d" % (finalHr - incrementHr - 1, 60 + (finalMin-incrementMin) - 1, (60 + finalSec) - incrementSec)
         else:
-            print "%02d:%02d:%02d" % (finalHr - incrementHr, finalMin-incrementMin, finalSec - incrementSec)
-    
+            print "%02d:%02d:%02d" % (finalHr - incrementHr -1, finalMin-incrementMin, finalSec - incrementSec)
     sys.stdout.write("\033[F")
     time.sleep(1)
     
     
     
-print "{}:{}:{}".format(incrementHr,incrementMin, incrementSec)
+print "TImer Done".format(incrementHr,incrementMin, incrementSec)
+
+
+
+def messageBoxTest():
+    tkMessageBox.showinfo( "Timer.py", "Timer Done", parent=root)
+
+messageBoxTest()
+
+root.destroy()
+root.mainloop()
 
