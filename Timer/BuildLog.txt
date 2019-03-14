@@ -26,3 +26,7 @@ With limited testing, the code seems to pass most test cases. Need to test somet
 Next goal is to add some GUI elements to make something pop up when the timer is done. But otherwise, it looks like I'm moving pretty fast towards a final build
 
 
+[2019-03-13 21:27:15.008179]
+Tweaked the logic with more test cases, conditionally works at the moment. Also added GUI elements to make the end of th timer much more apparent. Seems to be getting closer to a finished product minus the lack of testing
+
+
