@@ -1,0 +1,4 @@
+[2019-03-15 01:40:15.222410]
+Lay the foundation of a song, Node, and PlayList. Testing out my Java and OOP skills and just generally appreciating my love for linked lists.
+
+
