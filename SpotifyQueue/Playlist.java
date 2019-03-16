@@ -1,10 +1,14 @@
 public class Playlist {
-    private Node head;
-    private Node tail;
+    public  Node head;
+    public Node tail;
 
     public Playlist() {
         head = null;
         tail = null;
+    }
+
+    public Node getHead() {
+        return this.head;
     }
 
     public void append(Song s) {
@@ -27,19 +31,11 @@ public class Playlist {
         }
     }
 
-    public static void main(String args[]) {
-        Playlist p = new Playlist();
-
-        Song s1 = new Song("Island in the Sun", "Weezer", "Green Album", 4.5);
-        Song s2 = new Song("Nothing Else Matters", "Metallica", "The Black Album", 2.5);
-        Song s3 = new Song("Dirty Water", "Foo Fighters", "Concrete and Gold", 3.2);
-        Song s4 = new Song("Everlong", "Foo Fighters", "The Size and the Shape", 3.5);
-
-        p.append(s1);
-        p.append(s2);
-        p.append(s3);
-        p.append(s4);
-
-        p.print();
+    public void shallowCopy(Playlist other) {
+        Node temp = head; 
+        while (temp != null) {
+            other.append(temp.getSong());
+            temp = temp.getNext();
+        }
     }
 }

@@ -2,3 +2,7 @@
 Lay the foundation of a song, Node, and PlayList. Testing out my Java and OOP skills and just generally appreciating my love for linked lists.
 
 
+[2019-03-16 16:47:37.711795]
+Created playNext and playPrev functionality. Trying to figure out how to create a temporary queue with minimal code. Will try to work on a basic solution and then try to expand from that 
+
+
