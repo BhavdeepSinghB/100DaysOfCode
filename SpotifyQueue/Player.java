@@ -28,6 +28,11 @@ public class Player {
 		
 	}
 
+	public void addToQueue(Song s) {
+		Node queue = new Node(s, exp.head.getNext(), exp.head, true);
+		exp.head.setNext(queue);
+	}
+
 	public static void main(String args[]) {
 		Playlist list = new Playlist();
 
@@ -39,16 +44,30 @@ public class Player {
 		list.append(s);
 		s = new Song("Congregation", "Foo fighters", "Sonic Highways", 3.8);
 		list.append(s);
+		s = new Song("Out of Control", "Hoobastank", "The reason", 4.1);
 
+		list.print();
+
+		System.out.println();
 
 		Player pl = new Player(list);
 		System.out.println(pl.nowPlaying());
 		pl.playNext();
 		System.out.println(pl.nowPlaying());
+		pl.addToQueue(s);
+		pl.playNext();
+		System.out.println(pl.nowPlaying());
+		pl.playNext();
+		System.out.println(pl.nowPlaying());
 		pl.playPrev();
+		System.out.println(pl.nowPlaying());
+
+		/*
 		System.out.println(pl.nowPlaying());
 		pl.playPrev();
 		//System.out.println(pl.nowPlaying());
+		*/
+		
 
 	}
 }
