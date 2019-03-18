@@ -6,3 +6,7 @@ Lay the foundation of a song, Node, and PlayList. Testing out my Java and OOP sk
 Created playNext and playPrev functionality. Trying to figure out how to create a temporary queue with minimal code. Will try to work on a basic solution and then try to expand from that 
 
 
+[2019-03-18 15:23:11.930717]
+I didn't realize that temporarily adding to a queue would be that simple. The project can be considered over since I now understand the working of a queue in a  music player. The advantage of doing it was getting the idea, which I was simmply overcomplicating
+
+
