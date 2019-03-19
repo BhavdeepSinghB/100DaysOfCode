@@ -1,0 +1,4 @@
+[2019-03-18 17:03:36.454738]
+Started build, connected to test server and initialized stack. Plans to understand how to send and receive messages to paritcular users
+
+
