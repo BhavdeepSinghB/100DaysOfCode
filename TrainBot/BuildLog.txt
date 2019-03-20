@@ -2,3 +2,7 @@
 Started build, connected to test server and initialized stack. Plans to understand how to send and receive messages to paritcular users
 
 
+[2019-03-19 22:38:57.960009]
+The rewrite version is really annoying when it comes to fetching and sending messages. I have also encountered some design flaws and will be talking with the mids about how we could resolve them. In an ideal scenario, the bot will be ready in a few days' time
+
+
