@@ -4,13 +4,31 @@ import time
 import collections
 from threading import Timer
 
-TOKEN = 'your token here'
-inviteCode = 'your invite here'
 
+TOKEN = 'NTU3MzMzMTMyODY1Njk5ODQz.D3GxZg.EFfkSxAU3IHWmERPTzhbnX85CDQ'
+fileName = "invitesaver.bin"
+inviteCode = ""
 client = discord.Client()
 
 
 trainQueue = collections.deque([])
+
+def addToQueue(author):
+    if author not in trainQueue:
+        trainQueue.append(author)
+        return True
+    return False
+
+def writeToFile(arg):
+    fh = open(fileName, "w")
+    fh.write("{}".format(arg))
+    fh.close()
+
+def readFromFile():
+    fh = open(fileName, "r")
+    code = fh.readline()
+    fh.close()
+    return code
 
 
 @client.event
@@ -38,20 +56,22 @@ async def on_message(message):
 
     if(message.content.lower().startswith('!claim')):
         if(message.author == popped):
-            print("here")
+            inviteCode = readFromFile()
+            print(inviteCode)
             await message.author.send("{} is your invite code, please generate an invite and use !invite + your code to keep the train moving".format(inviteCode))
         else:
             await message.author.send("Wait your turn")
 
-def addToQueue(author):
-    if author not in trainQueue:
-        trainQueue.append(author)
-        return True
-    return False
+    if(message.content.lower().startswith('!invite')):
+        if(message.author == popped):
+            newinv = message.content
+            newinv = newinv.replace("!invite ", "")
+            inviteCode = newinv
+            writeToFile(newinv)
+            await trainStuff()
 
-
-    
-
+        else:
+            await message.author.send('Wait your turn')
 
 
 @client.event
