@@ -6,3 +6,7 @@ Started build, connected to test server and initialized stack. Plans to understa
 The rewrite version is really annoying when it comes to fetching and sending messages. I have also encountered some design flaws and will be talking with the mids about how we could resolve them. In an ideal scenario, the bot will be ready in a few days' time
 
 
+[2019-03-20 21:18:01.963446]
+Added functinos to save the current invite to a file in case the bot were ever to go offline. Also added fucntionality for people to share their invite back for the train to keep moving. A prototype seems ready. Now for testing with multiple people
+
+
