@@ -10,3 +10,8 @@ The rewrite version is really annoying when it comes to fetching and sending mes
 Added functinos to save the current invite to a file in case the bot were ever to go offline. Also added fucntionality for people to share their invite back for the train to keep moving. A prototype seems ready. Now for testing with multiple people
 
 
+[2019-03-21 19:56:05.445901]
+A basic bot is ready. It manages the train we want it tobut works only in an ideal scenario where people are giving back invites and claiming things in under 10 minutes.
+I need to add a timer and something to validate the given invite since at the moment, all it is taking is a string
+
+

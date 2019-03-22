@@ -9,8 +9,6 @@ TOKEN = 'NTU3MzMzMTMyODY1Njk5ODQz.D3GxZg.EFfkSxAU3IHWmERPTzhbnX85CDQ'
 fileName = "invitesaver.bin"
 inviteCode = ""
 client = discord.Client()
-
-
 trainQueue = collections.deque([])
 
 def addToQueue(author):
@@ -30,17 +28,8 @@ def readFromFile():
     fh.close()
     return code
 
-
-@client.event
-async def trainStuff():
-        if(len(trainQueue) != 0):
-            global popped
-            popped = trainQueue.popleft()
-            await popped.send("Your invite code is ready, please type !claim to claim it. You have 10 minutes")
-
 @client.event
 async def on_message(message):
-    #client.loop.create_task(trainStuff())
     person = message.author
     if person == client.user:
         return
@@ -51,13 +40,11 @@ async def on_message(message):
             await message.channel.send("{0.name} added to the train".format(person))
         else:
             await message.channel.send("{0.name} is already on the train".format(person))
-    
-    await trainStuff()
 
+    await trainStuff()
     if(message.content.lower().startswith('!claim')):
         if(message.author == popped):
             inviteCode = readFromFile()
-            print(inviteCode)
             await message.author.send("{} is your invite code, please generate an invite and use !invite + your code to keep the train moving".format(inviteCode))
         else:
             await message.author.send("Wait your turn")
@@ -68,10 +55,24 @@ async def on_message(message):
             newinv = newinv.replace("!invite ", "")
             inviteCode = newinv
             writeToFile(newinv)
+            trainQueue.popleft()
+            on_message.count = 0
             await trainStuff()
 
         else:
             await message.author.send('Wait your turn')
+on_message.count = 0
+
+@client.event
+async def trainStuff():
+        if(len(trainQueue) != 0):
+            global popped
+            popped = trainQueue[0]
+            if on_message.count == 0:
+                await popped.send("Your invite code is ready, please type !claim to claim it. You have 10 minutes")
+                on_message.count += 1
+            
+                
 
 
 @client.event
@@ -80,5 +81,4 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-
 client.run(TOKEN)
