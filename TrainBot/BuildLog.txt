@@ -15,3 +15,7 @@ A basic bot is ready. It manages the train we want it tobut works only in an ide
 I need to add a timer and something to validate the given invite since at the moment, all it is taking is a string
 
 
+[2019-03-23 15:23:34.481377]
+Jerk proofed this bot by adding a timer to check for responses, in case someone dissapears. They will now, not be able to claim the invite after 10 minutes. In additon, invalid invites are not accepted anymore
+
+
