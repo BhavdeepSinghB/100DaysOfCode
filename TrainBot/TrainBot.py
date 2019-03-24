@@ -109,7 +109,7 @@ async def trainStuff():
         if on_message.count == 0:
            await popped.send("Your invite code is ready, please type !claim to claim it. You have 10 minutes")
            signal.signal(signal.SIGALRM, noResponse)
-           signal.alarm(5)
+           signal.alarm(600)
            on_message.count += 1
             
             
