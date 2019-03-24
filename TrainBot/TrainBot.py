@@ -88,7 +88,8 @@ async def on_message(message):
                 await message.author.send("Thank you for riding the train")
                 inviteCode = newinv
                 writeToFile(newinv)
-                trainQueue.popleft()
+                if len(trainQueue != 0):
+                    trainQueue.popleft()
                 on_message.count = 0
                 await trainStuff()
 
