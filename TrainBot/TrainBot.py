@@ -78,7 +78,7 @@ async def on_message(message):
             await message.author.send("Wait your turn")
             trainStuff.claimed == True
 
-    if(message.content.lower().startswith('!invite')):
+    if(message.content.lower().startswith('!invite ')):
         if(message.author == popped):
             newinv = message.content
             newinv = newinv.replace("!invite ", "")
