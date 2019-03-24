@@ -68,7 +68,7 @@ async def on_message(message):
         print(trainStuff.claimed)
         signal.alarm(0)
         if(trainStuff.claimed == False):
-            await message.author.send("Time Out")
+            await message.author.send("Too late, please add yourself to the train again")
             trainStuff.claimed = True
         elif(message.author == popped and trainStuff.claimed is True):
             inviteCode = readFromFile()
@@ -82,7 +82,7 @@ async def on_message(message):
         if(message.author == popped):
             newinv = message.content
             newinv = newinv.replace("!invite ", "")
-            if not isValidInvite(str(newinv)):
+            if not isValidInvite(str(newinv)) or newinv == inviteCode:
                 await message.author.send("{} is not a valid invite, please try again".format(newinv))
             else:
                 await message.author.send("Thank you for riding the train")
