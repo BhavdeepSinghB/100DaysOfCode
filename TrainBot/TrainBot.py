@@ -8,7 +8,7 @@ import json
 import string
 import signal
 
-TOKEN = 'NTU3MzMzMTMyODY1Njk5ODQz.D3GxZg.EFfkSxAU3IHWmERPTzhbnX85CDQ'
+TOKEN = ''
 fileName = "invitesaver.bin"
 inviteCode = ""
 client = discord.Client()

@@ -19,3 +19,8 @@ I need to add a timer and something to validate the given invite since at the mo
 Jerk proofed this bot by adding a timer to check for responses, in case someone dissapears. They will now, not be able to claim the invite after 10 minutes. In additon, invalid invites are not accepted anymore
 
 
+[2019-03-25 12:54:06.899632]
+Thanks to help from Tom, I've been able to see and correct design flaws. This project is teaching me how to deal with teamwork and code reviews. Something that school hasn't taught me well enough. I have to say I enjoy it, as long as my team has an open mind. 
+Tom overall, has been really helpful and I appreciate all his help
+
+
