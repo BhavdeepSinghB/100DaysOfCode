@@ -8,7 +8,7 @@ import json
 import string
 import signal
 
-TOKEN = ''
+TOKEN = 'NTU3MzMzMTMyODY1Njk5ODQz.D3GxZg.EFfkSxAU3IHWmERPTzhbnX85CDQ'
 fileName = "invitesaver.bin"
 inviteCode = ""
 client = discord.Client()
@@ -33,6 +33,9 @@ def readFromFile():
     return code
 
 def isValidInvite(text):
+    inviteCode = readFromFile()
+    if text == inviteCode:
+        return False
     if not (all(c in string.hexdigits for c in text) and len(text) == 32):
         return False
     response = requests.get("https://api.morningstreams.com/api/invites/" + text)
@@ -46,7 +49,8 @@ def isValidInvite(text):
 
 def noResponse(signum, frame):
     trainStuff.claimed = False
-    trainQueue.popleft()
+    if(len(trainQueue) != 0):
+        trainQueue.popleft()
     on_message.count = 0
     
 @client.event
@@ -82,13 +86,13 @@ async def on_message(message):
         if(message.author == popped):
             newinv = message.content
             newinv = newinv.replace("!invite ", "")
-            if not isValidInvite(str(newinv)) or newinv == inviteCode:
+            if not isValidInvite(str(newinv)):
                 await message.author.send("{} is not a valid invite, please try again".format(newinv))
             else:
                 await message.author.send("Thank you for riding the train")
                 inviteCode = newinv
                 writeToFile(newinv)
-                if len(trainQueue != 0):
+                if len(trainQueue) != 0:
                     trainQueue.popleft()
                 on_message.count = 0
                 await trainStuff()
@@ -106,13 +110,13 @@ async def trainStuff():
         global popped
         popped = trainQueue[0]
         global claimed
-        #print(on_message.count)
         if on_message.count == 0:
            await popped.send("Your invite code is ready, please type !claim to claim it. You have 10 minutes")
            signal.signal(signal.SIGALRM, noResponse)
            signal.alarm(600)
            on_message.count += 1
-            
+    else:
+        popped = None
             
 trainStuff.claimed = True
 
