@@ -52,13 +52,13 @@ def noResponse(signum, frame):
     if(len(trainQueue) != 0):
         trainQueue.popleft()
     on_message.count = 0
-    
+
 @client.event
 async def on_message(message):
     person = message.author
     if person == client.user:
         return
-
+    #await channel.send("hello")
     if message.content.lower().startswith('!train add'):
 
         if addToQueue(person) == True:
@@ -67,7 +67,7 @@ async def on_message(message):
             await message.channel.send("{0.name} is already on the train".format(person))
 
     await trainStuff()
-    
+    #await reminders()
     if(message.content.lower().startswith('!claim')):
         print(trainStuff.claimed)
         signal.alarm(0)
@@ -101,9 +101,6 @@ async def on_message(message):
             await message.author.send('Wait your turn')
 on_message.count = 0
 
-def checkVal():
-    return on_message.acknowledged
-
 @client.event
 async def trainStuff():    
     if(len(trainQueue) != 0):
@@ -113,13 +110,20 @@ async def trainStuff():
         if on_message.count == 0:
            await popped.send("Your invite code is ready, please type !claim to claim it. You have 10 minutes")
            signal.signal(signal.SIGALRM, noResponse)
-           signal.alarm(600)
+           signal.alarm(5)
            on_message.count += 1
     else:
         popped = None
-            
-trainStuff.claimed = True
 
+@client.event
+async def reminders():
+    await client.wait_until_ready()
+    #i = 0
+    print("I am here")
+    while(not client.is_closed):
+        channel = client.get_channel(id=560227488786284554)
+        await channel.send("Hello")
+        await asyncio.sleep(5)
 
 @client.event
 async def on_ready():
@@ -127,4 +131,6 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
+
+client.loop.create_task(reminders())
 client.run(TOKEN)
