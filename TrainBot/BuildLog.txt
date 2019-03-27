@@ -24,3 +24,7 @@ Thanks to help from Tom, I've been able to see and correct design flaws. This pr
 Tom overall, has been really helpful and I appreciate all his help
 
 
+[2019-03-26 23:52:05.036464]
+Trying to bypass multithreading problem by adding a reminder message every 10 minutes. This would, at least to some extent, keep the train moving
+
+
