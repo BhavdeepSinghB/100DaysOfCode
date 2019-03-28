@@ -8,18 +8,28 @@ import json
 import string
 import signal
 
-TOKEN = ''
+TOKEN = 'NTU3MzMzMTMyODY1Njk5ODQz.D3rKBg.RT3L-BcSox26gxmBkXrs6D4EZxc'
 fileName = "invitesaver.bin"
 inviteCode = ""
 client = discord.Client()
 trainQueue = collections.deque([])
-
 
 def addToQueue(author):
     if author not in trainQueue:
         trainQueue.append(author)
         return True
     return False
+
+def removeFromQueue(author):
+    if author not in trainQueue:
+        return False
+    trainQueue.remove(author)
+    return True
+
+def findPosition(author):
+    if author not in trainQueue:
+        return -1
+    return trainQueue.index(author)
 
 def writeToFile(arg):
     fh = open(fileName, "w")
@@ -58,7 +68,6 @@ async def on_message(message):
     person = message.author
     if person == client.user:
         return
-    #await channel.send("hello")
     if message.content.lower().startswith('!train add'):
 
         if addToQueue(person) == True:
@@ -67,10 +76,8 @@ async def on_message(message):
             await message.channel.send("{0.name} is already on the train".format(person))
 
     await trainStuff()
-    #await reminders()
+
     if(message.content.lower().startswith('!claim')):
-        print(trainStuff.claimed)
-        signal.alarm(0)
         if(trainStuff.claimed == False):
             await message.author.send("Too late, please add yourself to the train again")
             trainStuff.claimed = True
@@ -99,6 +106,31 @@ async def on_message(message):
 
         else:
             await message.author.send('Wait your turn')
+
+    if(message.content.lower().startswith('!train remove')):
+        if findPosition(person) == 0:
+            removeFromQueue(person)
+            await message.channel.send("{0.name} removed from the train".format(message.author))
+            on_message.count = 0
+            await trainStuff()
+        elif removeFromQueue(person) == True:
+            await message.channel.send("{0.name} removed from the train".fromat(message.author))
+        else:
+            await message.channel.send("{0.name} was not found in the train".format(message.author))
+
+    if(message.content.lower().startswith('!train help')):
+        await message.channel.send("!train add       -      Hop on the train")
+        await message.channel.send("!train remove    -      Hop off the train\n")
+        await message.channel.send("If you are already on the train \n!train check   -     Check your position")
+
+    if(message.content.lower().startswith('!train check')):
+        position = findPosition(person)
+        if position == 0:
+            await message.channel.send("{} at position {} in the train. Check your Private Messages there's a 10 minute limit".format(str(person)[:-5], int(position) + 1))
+        elif position == -1:
+            await message.channel.send("{0.name} not found on the train, please type !train add to add yourself".format(person))
+        else:
+            await message.channel.send("{} at position {} in the train".format(str(person)[:-5], int(position) + 1))
 on_message.count = 0
 
 @client.event
@@ -110,20 +142,21 @@ async def trainStuff():
         if on_message.count == 0:
            await popped.send("Your invite code is ready, please type !claim to claim it. You have 10 minutes")
            signal.signal(signal.SIGALRM, noResponse)
-           signal.alarm(5)
+           signal.alarm(100)
            on_message.count += 1
     else:
         popped = None
+trainStuff.claimed = True
 
 @client.event
 async def reminders():
     await client.wait_until_ready()
-    #i = 0
     print("I am here")
-    while(not client.is_closed):
-        channel = client.get_channel(id=560227488786284554)
-        await channel.send("Hello")
-        await asyncio.sleep(5)
+    channel = client.get_channel(560227488786284554)
+    while not client.is_closed():
+        await channel.send("The train is taking in new passangers all the time! Type \"!train add\" to hop on and grab an invite")
+        await channel.send("Type \"!train remove\" to hop off the train in case you got your invite or \"!train help\" for other commands")
+        await asyncio.sleep(600)
 
 @client.event
 async def on_ready():

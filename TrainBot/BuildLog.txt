@@ -28,3 +28,8 @@ Tom overall, has been really helpful and I appreciate all his help
 Trying to bypass multithreading problem by adding a reminder message every 10 minutes. This would, at least to some extent, keep the train moving
 
 
+[2019-03-27 18:03:46.115020]
+Added a lot of functionality. Users can now remove themselves off the train, and if the person is the one who is supposed to get the invite, then that is hand handled as well.
+In addition, we have a !train check fucntion to help people understand their position and basically a directory of all the cmmands available to the general public as a !train help function
+
+
