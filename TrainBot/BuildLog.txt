@@ -33,3 +33,7 @@ Added a lot of functionality. Users can now remove themselves off the train, and
 In addition, we have a !train check fucntion to help people understand their position and basically a directory of all the cmmands available to the general public as a !train help function
 
 
+[2019-03-28 20:11:35.392522]
+Added functionality to check for returned invites, if the person doesn't submit an invite, TODO: Ban them. Else, the invite is given to the next person. Pending further testing
+
+
