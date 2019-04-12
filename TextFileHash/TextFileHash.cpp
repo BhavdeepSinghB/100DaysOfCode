@@ -10,17 +10,20 @@ void linearProbing() {
 
 string readFromFile(string fileName, int offset) {
     fstream f;
-    string returnable = "";
+    string returnable;
     f.open("/Users/Bhavdeep/Documents/100DaysOfCode/TextFileHash/" + fileName, ios::in);
     f.seekg(offset);
     if(f) {
         f.seekg(offset);
         char c = f.get();
         returnable += c;
-        while (c != '%' && !f.eof()) {
+        while (!f.eof()) {
             c = f.get();
             if(c == EOF) {
                 continue;
+            }
+            if(c == '%') {
+                return returnable;
             }
             returnable += c;
         }
@@ -34,19 +37,36 @@ void writeToFile(string fileName, string content, int offset) {
     fstream f;
     f.open("/Users/bhavdeep/Documents/100DaysOfCode/TextFileHash/" + fileName, ios::out | ios::in);
     f.seekg(offset);
-
+    string checker;
+    content += '%';
     if(f) {
-        string fileContent = readFromFile(fileName, offset);
-        if(fileContent.empty() || fileContent[0] == EOF) {
-            //TODO: Figure out a way to read the content size with minimum code
-            //Comment - Might have to change the entire blueprint of the program
+        f.seekg(offset);
+        while(checker.length() != content.length()) {
+            char c = f.get();
+            //cout<<checker[checker.length()];
+            checker += c;
         }
-
+        bool blank = true;
+        for(char c : checker) {
+            if(!isblank(c))
+                blank = false;
+        }
+        if(checker[0] == EOF || !blank)
+        {
+            f.seekp(offset);
+            f<<content;
+        }
+        else {
+            //TODO: Recursive linear probing?
+            return;
+        }
     }
 }
 
 
 int main() {
     writeToFile("TextFileHashMemory.txt", "hello", 3);
-    cout<<readFromFile("TextFIleHashMemory.txt", 3);
+    cout<<readFromFile("TextFIleHashMemory.txt", 3)<<endl;
+    writeToFile("TextFileHashMemory.txt", "he", 0);
+    cout<<readFromFile("TextFileHashMemory.txt", 0)<<endl;
 }
