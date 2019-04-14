@@ -30,30 +30,47 @@ string readFromFile(string fileName, int offset) {
         f.close();
         return returnable;
     }
-    return "NULL";
+    return "NO";
+}
+
+void readAll(string fileName) {
+    fstream f;
+    f.open("/Users/bhavdeep/Documents/100DaysOfCode/TextFileHash/" + fileName, ios::in);
+    f.seekg(0);
+    //string s;
+    while(!f.eof()) {
+        char c = f.get();
+        cout<<c;
+    }
 }
 
 void writeToFile(string fileName, string content, int offset) {
     fstream f;
-    f.open("/Users/bhavdeep/Documents/100DaysOfCode/TextFileHash/" + fileName, ios::out | ios::in);
+    f.open("/Users/bhavdeep/Documents/100DaysOfCode/TextFileHash/" + fileName, ios::out);
     f.seekg(offset);
     string checker;
     content += '%';
     if(f) {
+        cout<<"Checker:";
         f.seekg(offset);
         while(checker.length() != content.length()) {
             char c = f.get();
-            //cout<<checker[checker.length()];
+            cout<<checker[checker.length()];
             checker += c;
         }
+        cout<<endl;
         bool blank = true;
         for(char c : checker) {
-            if(!isblank(c))
+            if(c != char(NULL)) {
                 blank = false;
+                break;
+            }
+
         }
+        cout<<"Blank: "<<blank<<endl;
         if(checker[0] == EOF || !blank)
         {
-            f.seekp(offset);
+            //f.seekp(offset);
             f<<content;
         }
         else {
@@ -61,12 +78,15 @@ void writeToFile(string fileName, string content, int offset) {
             return;
         }
     }
+    //f<<content;
+    f.close();
 }
 
 
 int main() {
     writeToFile("TextFileHashMemory.txt", "hello", 3);
-    cout<<readFromFile("TextFIleHashMemory.txt", 3)<<endl;
+    //cout<<readFromFile("TextFIleHashMemory.txt", 3)<<endl;
     writeToFile("TextFileHashMemory.txt", "he", 0);
-    cout<<readFromFile("TextFileHashMemory.txt", 0)<<endl;
+    //cout<<readFromFile("TextFileHashMemory.txt", 0)<<endl;
+    readAll("TextFileHashMemory.txt");
 }
