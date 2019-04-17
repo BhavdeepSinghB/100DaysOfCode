@@ -44,49 +44,43 @@ void readAll(string fileName) {
     }
 }
 
-void writeToFile(string fileName, string content, int offset) {
+bool isBlank(string str) {
+    for(char c : str) {
+        if (c != NULL)
+            return false;
+        return true;
+    }
+}
+
+void writeToFIle(string fileName, int offset, string content) {
     fstream f;
-    f.open("/Users/bhavdeep/Documents/100DaysOfCode/TextFileHash/" + fileName, ios::out);
-    f.seekg(offset);
-    string checker;
-    content += '%';
+    f.open("/Users/bhavdeep/Documents/100DaysOfCode/TextFileHash/" + fileName, ios::in);
     if(f) {
-        cout<<"Checker:";
         f.seekg(offset);
-        while(checker.length() != content.length()) {
+        string checker;
+        while(checker.length() < content.length()) {
             char c = f.get();
-            cout<<checker[checker.length()];
             checker += c;
         }
-        cout<<endl;
-        bool blank = true;
-        for(char c : checker) {
-            if(c != char(NULL)) {
-                blank = false;
-                break;
-            }
-
-        }
-        cout<<"Blank: "<<blank<<endl;
-        if(checker[0] == EOF || !blank)
-        {
-            //f.seekp(offset);
+        if(isBlank(checker) || checker[0] == EOF) {
+            f.close();
+            f.open("/Users/bhavdeep/Documents/100DaysOfCode/TextFileHash/" + fileName, ios::app);
+            f.seekp(offset);
             f<<content;
-        }
-        else {
-            //TODO: Recursive linear probing?
+            f.close();
             return;
         }
+        //else
+            //TODO: Linear probing
+        f.close();
     }
-    //f<<content;
-    f.close();
 }
 
 
 int main() {
-    writeToFile("TextFileHashMemory.txt", "hello", 3);
-    //cout<<readFromFile("TextFIleHashMemory.txt", 3)<<endl;
-    writeToFile("TextFileHashMemory.txt", "he", 0);
-    //cout<<readFromFile("TextFileHashMemory.txt", 0)<<endl;
-    readAll("TextFileHashMemory.txt");
+    fstream f;
+
+    writeToFIle("TextFileHashMemory.txt", 6, "Yos");
+    cout<<readFromFile("TextFileHashMemory.txt", 0);
+    //readAll("TextFileHashMemory.txt");
 }
