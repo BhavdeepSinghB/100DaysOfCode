@@ -3,15 +3,30 @@
 #include<string>
 #include<cctype>
 using namespace std;
+const string FILENAME = "TextFileHashMemory.txt";
 
-void linearProbing() {
+/*void linearProbing() {
     return;
+}*/
+
+void init() {
+    fstream f;
+    f.open("/Users/Bhavdeep/Documents/100DaysOfCode/TextFileHash/" + FILENAME, ios::app | ios::in);
+    for(int i = 0; i<10000; i++) {
+            f<<" ";
+    }
+    f.close();
+
 }
 
-string readFromFile(string fileName, int offset) {
+int hashfunc(string content) {
+    return content.length();
+}
+
+string readFromFile(int offset) {
     fstream f;
     string returnable;
-    f.open("/Users/Bhavdeep/Documents/100DaysOfCode/TextFileHash/" + fileName, ios::in);
+    f.open("/Users/Bhavdeep/Documents/100DaysOfCode/TextFileHash/" + FILENAME, ios::in);
     f.seekg(offset);
     if(f) {
         f.seekg(offset);
@@ -33,9 +48,9 @@ string readFromFile(string fileName, int offset) {
     return "NO";
 }
 
-void readAll(string fileName) {
+void readAll() {
     fstream f;
-    f.open("/Users/bhavdeep/Documents/100DaysOfCode/TextFileHash/" + fileName, ios::in);
+    f.open("/Users/bhavdeep/Documents/100DaysOfCode/TextFileHash/" + FILENAME, ios::in);
     f.seekg(0);
     //string s;
     while(!f.eof()) {
@@ -52,35 +67,80 @@ bool isBlank(string str) {
     }
 }
 
-void writeToFIle(string fileName, int offset, string content) {
+void writeToFile(string content) {
     fstream f;
-    f.open("/Users/bhavdeep/Documents/100DaysOfCode/TextFileHash/" + fileName, ios::in);
+    f.open("/Users/bhavdeep/Documents/100DaysOfCode/TextFileHash/" + FILENAME, ios::in);
     if(f) {
-        f.seekg(offset);
-        string checker;
-        while(checker.length() < content.length()) {
-            char c = f.get();
-            checker += c;
-        }
-        if(isBlank(checker) || checker[0] == EOF) {
+        int offset = hashfunc(content);
+        bool written = false;
+        do {
+            f.seekg(offset);
+            string checker;
+            content += '%';
+            while(checker.length() < content.length()) {
+                char c = f.get();
+                checker += c;
+            }
+            cout<<checker<<endl;
+            if(isBlank(checker) || checker[0] == EOF) {
+                f.close();
+                f.open("/Users/bhavdeep/Documents/100DaysOfCode/TextFileHash/" + FILENAME, ios::app);
+                f.seekp(0, ios::beg);
+                f.seekp(offset, ios::end);
+                f<<content;
+                f.close();
+                written = true;
+                return;
+            }
+
             f.close();
-            f.open("/Users/bhavdeep/Documents/100DaysOfCode/TextFileHash/" + fileName, ios::app);
-            f.seekp(offset);
-            f<<content;
-            f.close();
-            return;
-        }
-        //else
-            //TODO: Linear probing
-        f.close();
+            content.pop_back();
+            offset += content.length();
+        } while(!written);
+
+        //cout<<"Occupied, moving "<<content.length()<<" characters"<<endl;
+        //writeToFile(fileName, offset+content.length(), content);
+
     }
 }
 
 
-int main() {
-    fstream f;
+/*
+bool find(string content, int offset) {
 
-    writeToFIle("TextFileHashMemory.txt", 6, "Yos");
-    cout<<readFromFile("TextFileHashMemory.txt", 0);
-    //readAll("TextFileHashMemory.txt");
+}
+*/
+
+bool find(string content) {
+    fstream f;
+    f.open("/Users/bhavdeep/Documents/100DaysOfCode/TextFileHash/" + FILENAME, ios::in);
+    string checker = "";
+    f.seekg(ios::beg);
+    int offset = hashfunc(content);
+    if(f) {
+        do {
+            f.seekg(offset);
+            checker = readFromFile(offset);
+            cout<<checker<<endl;
+            if(checker == content) {
+                return true;
+            }
+            offset += content.length();
+        } while(checker.length() == content.length() - 1);
+        return false;
+    }
+    return false;
+}
+
+
+
+
+int main() {
+    //init();
+    //writeToFile("Hello");
+    //writeToFile("Yos");
+    writeToFile("MaridharEetheUtha");
+    readAll();
+    //cout<<"\n"<<find("MaridharEetheUtha");
+
 }
