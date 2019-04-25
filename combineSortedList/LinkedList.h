@@ -40,5 +40,40 @@ class LinkedList {
                 p = p->getNext();
             }
         }
+
+        bool isEmpty() {
+            if(head == nullptr)
+                return true;
+            return false;
+        }
+
+        LinkedList combineList(LinkedList l2) {
+            LinkedList combinedList;
+            Node* p = this->head;
+            Node* q = l2.head;
+
+            while(p!=nullptr || q!=nullptr) {
+                if(p == nullptr && q != nullptr) {
+                    combinedList.append(q->getVal());
+                    q = q->getNext();
+                }
+                else if(q == nullptr && p != nullptr) {
+                    combinedList.append(p->getVal());
+                    p = p->getNext();
+                }
+                else {
+                    if(p -> getVal() < q->getVal()) {
+                        combinedList.append(p->getVal());
+                        p = p->getNext();
+                    }
+                    else {
+                        combinedList.append(q->getVal());
+                        q = q->getNext();
+                    }
+                }
+            }
+
+            return combinedList;
+        }
 };
 #endif //UNTITLED1_LINKEDLIST_H
