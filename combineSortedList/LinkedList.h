@@ -1,5 +1,6 @@
 //
 // Created by Bhavdeep Singh on 2019-04-24.
+// Time complexity - O(n)
 //
 #include<iostream>
 #include "Node.h"
