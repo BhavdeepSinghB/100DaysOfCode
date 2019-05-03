@@ -1,4 +1,40 @@
-.test {
-	background-color: blue;
-	color: white;
+
+#title {
+	display: flex;
+	font-family: Roboto-thin;
+	color: black;
+	justify-content: center;
+}
+
+#subtitle {
+	display: flex;
+	font-family: Roboto-thin;
+	color: black;
+	justify-content: center;
+}
+
+hr {
+	width: 50%;
+	height 3px;
+}
+
+main {
+	display: grid;
+	justify-items: center;
+	grid-template-rows: auto;
+	grid-template-columns: auto;
+}
+
+header {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#portrait {
+	padding-top: 50px;
+	display: flex;
+	justify-content: center;
+	width: 500px;
+	height: 500px;
+	filter: grayscale(100%);
 }
