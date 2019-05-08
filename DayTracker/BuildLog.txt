@@ -1,0 +1,4 @@
+[2019-05-07 20:13:06.850125]
+The application was relatively simple to make, was able to complete it in under 2 hours so happy about that. Prototype seems to be working but now I have to move to test the edge cases and maybe. JUST MAYBE make a UI
+
+
