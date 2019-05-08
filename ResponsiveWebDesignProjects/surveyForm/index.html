@@ -1,0 +1,76 @@
+<html>
+	<head>
+		<title> Survey Form </title>
+		<link rel="stylesheet" type="text/css" href="./styles.css">
+		<link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+	</head>
+	<body>
+		<header>
+			<h1 id="title">Survey Form</h1>
+			<p id="description">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			</p>
+		</header>
+		<main> 
+			<form id="survey-form">
+				<hr>
+				<div id="user-name">
+					<label for="name" id="name-label">Name: </label>
+					<input type="text" id="name" placeholder="John A Appleseed" required>
+				</div>
+				<div id="user-email">
+					<label for="email" id="email-label">Email:</label>
+					<input type="email" id="email" placeholder="jappleseed@zoidmeister.com" required>
+				</div>
+				<div id="user-age">
+					<label for="number" id="number-label">Age:</label>
+					<input type="number" id="number" min="0" max="100" placeholder="20">
+				</div>
+				<hr>
+				<div id="user-type">
+					<label for="dropdown">What's your skill level?<br></label>
+					<select name="dropdown" id="dropdown">
+						<option value="beginner" selected>Beginner</option>
+						<option value="novice">Novice</option>
+						<option value="advanced">Advanced</option>
+						<option value="God">God</option>
+					</select>
+				</div>
+				<div id="user-gender">
+					<label for="gender">Gender<br></label>
+					<input type="radio" name="gender" value="male">Male 
+					<input type="radio" name="gender" value="female">Female
+					<input type="radio" name="gender" value="other">Other 
+					<input type="radio" name="gender" value="undeclared">Choose not to declare 
+				</div>
+				<div id="user-skills">
+					<label for="skill">Skills<br></label>
+					<input type="checkbox" name="skill" value="C++">C++ 
+					<input type="checkbox" name="skill" value="Java">Java 
+					<input type="checkbox" name="skill" value="Python">Python
+					<input type="checkbox" name="skill" value="HTMl">HTML 
+					<input type="checkbox" name="skill" value="CSS">CSS 
+					<input type="checkbox" name="skill" value="MIPSAssembly">MIPS Assembly
+					<input type="checkbox" name="skill" value="other">Other 
+				</div>
+				<hr>
+				<div id="comments">
+					<label for="more">Additional Comments<br></label>
+					<textarea id="more"></textarea>
+				</div>
+				<hr>
+				<div id="user-final">
+					<button type="submit" id="submit">Submit</button>
+				</div>
+			</form>
+		</main>
+	</body>
+	<footer> 
+		<div id="final">
+			<hr>
+			Presented by <a href="https://www.github.com/BhavdeepSinghB/100DaysOfCode/" target="_blank">Bhavdeep Singh</a> as part of <a href="https://twitter.com/hashtag/100DaysOfCode?src=hashtag_click" target="_blank">#100DaysOfCode</a>
+			<hr>
+		</div>
+	</footer>
+</html>
