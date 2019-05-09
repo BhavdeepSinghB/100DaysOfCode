@@ -1,16 +1,16 @@
 import tweepy
 
 #Constants
-KEY = 'your key here'
-KEY_SECRET = 'your secret key here'
-TOKEN = 'your token here'
-TOKEN_SECRET = 'your secret token here'
+KEY = '#'
+KEY_SECRET = '#'
+TOKEN = '#'
+TOKEN_SECRET = '#'
 FILENAME = 'day.txt'
 MAX_CHARS = 280
 
 
 #Check if Tweet size is too big
-#Size is a separate variable because of links, which just add 23 chars
+#Size is a separate variable because Of links, which just add 23 chars
 def legalTweetSize(size):
 	if size > MAX_CHARS:
 		return False
@@ -32,7 +32,7 @@ numday = int(day)
 
 fh.close()
 
-tweetString = "#100DaysOFCode\nDay " + day + ": "
+tweetString = "#100DaysOfCode\nDay " + day + ": "
 
 userString = input('Enter the tweet: ')
 tweetString += userString
@@ -42,7 +42,7 @@ tweetSize = len(tweetString)
 while not legalTweetSize(tweetSize):
 	print(tweetString + "\nIs not a valid tweet, please shorten it by " + str(tweetSize - MAX_CHARS) + " characters")
 	userString = input("Enter the tweet: ")
-	tweetString = "#100DaysOFCode\nDay " + day + ": " + userString
+	tweetString = "#100DaysOfCode\nDay " + day + ": " + userString
 	tweetSize = len(tweetString)
 
 tweetClone = tweetString
@@ -56,7 +56,7 @@ if urlAsker.lower() == "y":
 			 while not legalTweetSize(tweetSize):
 			 	print(tweetString + "\nIs not a valid tweet, please shorten it by " + str(tweetSize - (MAX_CHARS - 23)) + " characters")
 			 	userString = input("Enter the tweet: ")
-			 	tweetString = "#100DaysOFCode\nDay " + day + ": " + userString
+			 	tweetString = "#100DaysOfCode\nDay " + day + ": " + userString
 			 	tweetSize = len(tweetString) + 24
 	#Approved to add URL, ask what kind
 	url = input("100DaysOfCode url? (Y/N) ")
@@ -71,7 +71,7 @@ api.update_status(tweetString)
 numday += 1
 
 fh = open(FILENAME, "w")
-write(numday)
+fh.write(numday)
 fh.close()
  
 
