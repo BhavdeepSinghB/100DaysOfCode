@@ -71,7 +71,7 @@ api.update_status(tweetString)
 numday += 1
 
 fh = open(FILENAME, "w")
-fh.write(numday)
+fh.write(str(numday))
 fh.close()
  
 
