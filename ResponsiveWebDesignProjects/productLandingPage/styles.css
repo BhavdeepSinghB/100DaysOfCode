@@ -1,0 +1,93 @@
+/* Imports */
+@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+/*CSS*/
+html {
+	font-family: 'Oswald', sans-serif;
+}
+li {
+	list-style: none;
+}
+
+a:link, a:visited {
+	text-decoration: none;
+	color: #900000;
+}
+nav {
+  position: fixed;
+  top: 0;
+  min-height: 75px;
+  padding: 0px 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #eee;
+}
+#logoimg {
+	width: 60vw;
+}
+#logoimg > img {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 10%;
+	height: 50%;
+}
+
+#nav-buttons > ul {
+	width: 35vw;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+#landing {
+	margin-top: 80px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	color: white;
+	height: 50vw;
+	background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('https://wallpaperplay.com/walls/full/2/d/b/259683.jpg');;
+	background-attachment: fixed;
+}
+
+#name {
+	font-size: 72px;
+	font-family: 'Lobster', cursive;
+	margin-bottom: 5px;
+}
+
+#initForm > input[type="text"] {
+	height: 20px;
+	width: 100%;
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	color: grey;
+	font-size: 20px;
+}
+
+#initForm > input[type="text"]:focus {
+	height: 20px;
+	width: 100%;
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	color: #900000;
+	font-size: 20px;
+	background-color: white;
+}
+
+#initForm > input[type="submit"] {
+	width: 100px;
+	text-decoration: none;
+	background-color: #900000;
+	color: white;
+	font-family: 'Oswald', sans-serif;
+	border: none;
+	border-radius: 25px;
+	height: 30px;
+	font-size: 15px;
+}
