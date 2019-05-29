@@ -1,10 +1,10 @@
 import tweepy
 
 #Constants
-KEY = '#'
-KEY_SECRET = '#'
-TOKEN = '#'
-TOKEN_SECRET = '#'
+KEY = 'fM0UAemMeBcH3qAvoVDjiLQj7'
+KEY_SECRET = 'JGFVuuB7dOtBQiUYYvk5RNvvTd5dFp7Nr3PjAybW26EVmggvKo'
+TOKEN = '755691023305740289-2lwNzJ5Ay3gbC440fimI1Qp18Sl6iVC'
+TOKEN_SECRET = 'qpNp1xTk0jnlul1OgYlBDhSowkAoM6rCnUbcIQQcwUUFD'
 FILENAME = 'day.txt'
 MAX_CHARS = 280
 
