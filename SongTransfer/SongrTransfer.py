@@ -4,8 +4,8 @@ import pprint
 
 #CONSTANTS
 
-CLIENT_ID = '74a7cfed9c0e434eac1a6ca56d9e41e8'
-CLIENT_SECRET = '1408599c0ce24a1c90cb3e35b40418c1'
+CLIENT_ID = '#'
+CLIENT_SECRET = '#'
 PLAYLIST_NAME = "Name the playlist"
 USERNAME = "bhavdeep2533"
 PLAYLSIT_ID = 'playlist ID here'
