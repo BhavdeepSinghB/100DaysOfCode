@@ -66,32 +66,23 @@ def isUsedInvite(text):
         return True
     else:
         return False
-
-def noResponse(signum, frame):
-    trainStuff.claimed = False
-    if(len(trainQueue) != 0):
-        trainQueue.popleft()
-    on_message.count = 0
-
-def noInv(signum, frame):
-    on_message.invite = False
-    on_message.count = 0
-
-async def checkBan():
+        
+async def checkBan(user):
     invite = readFromFile()
     if isUsedInvite(invite):
-        await popped.send("Unfortunately you claimed the invite and didn't return it, and hung the train, you have been banned from morningstreams")
-        banUser()
+        await user.send("Unfortunately you claimed the invite and didn't return it, and hung the train, you have been banned from morningstreams")
+        #banUser()
     else:
-        await popped.send("Your invite was not used and will be given to the next person")
+        await user.send("Your invite was not used and will be given to the next person")
         trainQueue.popleft()
         on_message.count = 0
         trainStuff.claimed = False
         popped = None
-        trainStuff()
+        await trainStuff()
 
 @client.event
 async def on_message(message):
+    print("Message received from {}, \"{}\"".format(message.author, message.content))
     person = message.author
     if(message.author == client.user):
         on_message.count += 1
@@ -99,8 +90,10 @@ async def on_message(message):
 
         if addToQueue(person) == True:
             await message.channel.send("{0.name} added to the train".format(person))
+            print("{0.name} added to the train".format(person))
         else:
             await message.channel.send("{0.name} is already on the train".format(person))
+            print("{0.name} is already on the train".format(person))
         on_message.count = 0
     await trainStuff()
 
@@ -112,9 +105,21 @@ async def on_message(message):
             inviteCode = readFromFile()
             await message.author.send("{} is your invite code, please generate an invite and use !invite + your code to keep the train moving".format(inviteCode))
             await message.author.send("You have 10 minutes")
-            signal.signal(signal.SIGALRM, noInv)
-            signal.alarm(600)
             trainStuff.claimed = True
+            channel = message.channel
+            def check(message):
+                print("message is {}".format(message))
+                return message is not None and isValidInvite(str(m.content))
+            
+            try:
+                message = await client.wait_for('message', timeout=60.0, check=check)
+            except asyncio.TimeoutError:
+                print("Timeout for user {}".format(message.author.name))
+                await checkBan(message.author)
+            else:
+                print("Successful exchange with {}".format(message.author))
+                await message.author.send("Thank you for riding the train")
+            
         else:
             await message.author.send("Wait your turn")
             trainStuff.claimed == True
@@ -174,8 +179,6 @@ async def trainStuff():
         global claimed
         if on_message.count == 0:
            await popped.send("Your invite code is ready, please type !claim to claim it. You have 10 minutes")
-           signal.signal(signal.SIGALRM, noResponse)
-           signal.alarm(600)
            on_message.count += 1
     else:
         popped = None
@@ -197,6 +200,8 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
+    channel = client.get_channel(557334663048200233)
+    await channel.send('Zoid\'s train bot online')
 
 client.loop.create_task(reminders())
 client.run(TOKEN)
